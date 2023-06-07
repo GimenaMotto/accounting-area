@@ -14,7 +14,7 @@
     },
     {
         "ALUMNO": "ALBERTO PRUEBA2",
-        "DIRECCION": "Calle cUEVAS, 91 5º - F",
+        "DIRECCION": "Calle Cuevas, 91 5º - F",
         "PROVINCIA": "Provincia",
         "CIUDAD": "Ciudad",
         "CODIGOPOSTAL": "28033",
@@ -24,5 +24,18 @@
         "TOTAL A PAGAR": "200.00",
         "DESCRIPCION": "Mensualidad correspondiente a MAY-2023.",
         "CURSO": "Preparación de las oposiciones de lalalal"
+    },
+    {
+        "ALUMNO": "ALBERTO PRUEBA3",
+        "DIRECCION": "Calle Monte Igueldo , 13",
+        "PROVINCIA": "Provincia",
+        "CIUDAD": "Ciudad",
+        "CODIGOPOSTAL": "28038",
+        "DNI": "11xx0000",
+        "ENVIAR": "NO",
+        "EMAIL": "prueba3.alumno@gmail.com",
+        "TOTAL A PAGAR": "200.00",
+        "DESCRIPCION": "Mensualidad correspondiente a MAY-2023.",
+        "CURSO": "Preparación de las oposiciones de arquitectos"
     }
 ]

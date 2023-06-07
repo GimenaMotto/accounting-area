@@ -5,7 +5,7 @@ const { format } = require('date-fns')
 
 
 // ejemplo números correlativos para las facturas
-let lastNumber = 65789
+let lastNumber = 12
 
 students.forEach((student, index) => {
 
@@ -76,14 +76,14 @@ students.forEach((student, index) => {
   
 
     // IVA
-    doc.font('Helvetica-Bold').fontSize(10).fillColor('black').text('IVA (0%)       - €', 360, 500, { align: 'right' });
+    doc.font('Helvetica-Bold').fontSize(10).fillColor('black').text('IVA (0%)       - €', 340, 500, { align: 'right' });
 
     // Línea separadora doble
     doc.moveTo(50, 517).lineTo(550, 517).stroke();
     doc.moveTo(50, 520).lineTo(550, 520).stroke();
 
     // Total a pagar
-    doc.font('Helvetica-Bold').fontSize(12).fillColor('black').text(`Total a pagar      ${student['TOTAL A PAGAR']}`, 360, 530, { align: 'right'});
+    doc.font('Helvetica-Bold').fontSize(14).fillColor('black').text(`Total (Euro)     ${student['TOTAL A PAGAR']}`, 340, 530, { align: 'right'});
  
 
     // Pie de página
@@ -98,7 +98,7 @@ students.forEach((student, index) => {
     
     doc.font('Helvetica').fontSize(7).fillColor('black').text(textoSinSaltosDeLinea, 70, 645 ,{
       align: 'justify',
-      width: 500,
+      width: 450,
       height: 300,
       lineGap: 5,
       indent: 50,
