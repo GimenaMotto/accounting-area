@@ -1,0 +1,28 @@
+[
+    {
+        "ALUMNO": "ALBERTO prueba",
+        "DIRECCION": "Calle Orense, 53 Esc. C 1º- D",
+        "PROVINCIA": "Madrid",
+        "CIUDAD": "Madrid",
+        "CODIGOPOSTAL": "28003",
+        "DNI": "0xx000xx",
+        "ENVIAR": "NO",
+        "EMAIL": "alberto.prueba@gmail.com",
+        "TOTAL A PAGAR": "80.00",
+        "DESCRIPCION": "Mensualidad correspondiente a MAY-2023.",
+        "CURSO": "Preparación de las oposiciones de Arquitecto para el Ayuntamiento y la Comunidad de Madrid"
+    },
+    {
+        "ALUMNO": "ALBERTO PRUEBA2",
+        "DIRECCION": "Calle cUEVAS, 91 5º - F",
+        "PROVINCIA": "Provincia",
+        "CIUDAD": "Ciudad",
+        "CODIGOPOSTAL": "28033",
+        "DNI": "000xx0000",
+        "ENVIAR": "NO",
+        "EMAIL": "prueba.alumno@gmail.com",
+        "TOTAL A PAGAR": "200.00",
+        "DESCRIPCION": "Mensualidad correspondiente a MAY-2023.",
+        "CURSO": "Preparación de las oposiciones de lalalal"
+    }
+]
