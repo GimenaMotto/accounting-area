@@ -11,6 +11,7 @@
   "dependencies": {
     "date-fns": "^2.30.0",
     "fs": "^0.0.1-security",
+    "nodemailer": "^6.9.3",
     "pdfkit": "^0.13.0"
   }
 }

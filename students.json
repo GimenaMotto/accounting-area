@@ -50,6 +50,19 @@
         "TOTAL A PAGAR": "70.00",
         "DESCRIPCION": "Mensualidad correspondiente a MAY-2023.",
         "CURSO": "Preparación de las oposiciones de arquitectos"
+    },
+    {
+        "ALUMNO": "QUIQUEPRUEBA ENVIAR",
+        "DIRECCION": "Calle nombredecalle , 10, 2do 1",
+        "PROVINCIA": "Provincia",
+        "CIUDAD": "Ciudad",
+        "CODIGOPOSTAL": "28034",
+        "DNI": "11xx0000",
+        "ENVIAR": "SI",
+        "EMAIL": "ealvaro@oposicionesarquitectos.com",
+        "TOTAL A PAGAR": "120.00",
+        "DESCRIPCION": "Mensualidad correspondiente a MAY-2023.",
+        "CURSO": "Preparación de las oposiciones de arquitectos prueba"
     }
 
 ]
