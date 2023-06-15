@@ -1,9 +1,11 @@
+require('dotenv').config()
+const readline = require('readline');
+
 const students = require('./students.json')
 const PDFDocument = require('pdfkit')
 const fs = require('fs')
 const { format } = require('date-fns')
 const nodemailer = require('nodemailer')
-
 
 const pathToCalibri = './Calibri Regular.ttf'
 const pathToCalibriBold = './Calibri Bold.ttf'
@@ -128,47 +130,115 @@ students.forEach((student, index) => {
     });
 });
 
-
-
-// Configuración del transporte de correo electrónicO
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'gmotto.oposicionesarquitectos@gmail.com',
-    pass: ''
+      user: 'gimenapimba@gmail.com',
+      pass: process.env.PASSWORD,
+  },
+  tls: {
+      rejectUnauthorized: false,
+  },
+});
+
+let lastNumberEmail = 1476;
+students.forEach((student, index) => {
+  lastNumberEmail++;
+
+  if (student.ENVIAR === 'SI') {
+      // Código para enviar la factura por correo electrónico
+      const invoice = `${student.ALUMNO.replace(/ /g, '_')}_20230${lastNumberEmail}.pdf`;
+      const recipient = student.EMAIL;
+      const subject = 'Factura de OPOSICIONES ARQUITECTOS';
+      const body = `Hola! este es un correo de prueba. Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente al mes en curso.`;
+
+      const mailOptions = {
+          from:'Gimena Motto <gimenapimba@gmail.com>',
+          to: recipient,
+          subject: subject,
+          text: body,
+          attachments: [
+              {
+                  filename: invoice,
+                  path: `./${invoice}`
+              }
+          ]
+      };
+
+      transporter.sendMail(mailOptions, (err, info) => {
+          if (err) {
+              console.error('Error al enviar el correo electrónico:', err);
+          } else {
+              console.log('Correo electrónico enviado:', info.response);
+          }
+      });
   }
 });
+
+const XLSX = require('xlsx');
+
+// Crear una nueva hoja de cálculo
+const workbook = XLSX.utils.book_new();
+
+// Crear una nueva hoja en el libro de trabajo
+const worksheet = XLSX.utils.json_to_sheet([]);
+
+// Agregar encabezados de columna
+const headers = ['Factura', 'Fecha', 'Cliente', 'Importe Neto', 'IVA', 'Importe Bruto'];
+const headerRow = XLSX.utils.sheet_add_aoa(worksheet, [headers], { origin: 'A1' });
+
+let rowIndex = 2; // La primera fila se usa para los encabezados
+
+let lastNumberList = 1476
 
 students.forEach((student, index) => {
-  if (student.ENVIAR === 'SI') {
-    // Código para enviar la factura por correo electrónico
-    const invoice = `${student.ALUMNO.replace(/ /g, '_')}_20230${lastNumber}.pdf`;
-    const recipient = student.EMAIL;
-    const subject = 'Factura de OPOSICIONES ARQUITECTOS';
-    const body = `Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente al mes en curso.`;
 
-    const mailOptions = {
-      from: 'tu-correo@example.com',
-      to: recipient,
-      subject: subject,
-      text: body,
-      attachments: [
-        {
-          filename: invoice,
-          path: `./${invoice}`
-        }
-      ]
-    };
+ lastNumberList++;
 
-    // Enviar correo electrónico
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error(`Error al enviar el correo electrónico a ${recipient}: ${error}`);
-      } else {
-        console.log(`Factura enviada por correo electrónico a ${recipient}`);
-      }
-    });
-  } else {
-    console.log(`Factura generada para ${student.ALUMNO}, pero no se enviará por correo electrónico.`);
-  }
+  const currentDate = new Date();
+  const formattedDate = format(currentDate, 'MM/dd/yyyy');
+  const importeNeto = student['TOTAL A PAGAR'];
+  const importeBruto = student['TOTAL A PAGAR'];
+
+  const rowData = [`20230${lastNumberList}`, formattedDate, student.ALUMNO, importeNeto, '  -  €', importeBruto];
+  const row = XLSX.utils.sheet_add_aoa(worksheet, [rowData], { origin: `A${rowIndex}` });
+  rowIndex++;
 });
+
+// Agregar la hoja al libro de trabajo
+XLSX.utils.book_append_sheet(workbook, worksheet, 'Facturas');
+
+// Guardar el libro de trabajo como archivo Excel
+const excelFileName = 'facturas.xlsx';
+XLSX.writeFile(workbook, excelFileName);
+
+console.log(`Archivo Excel generado: ${excelFileName}`);
+
+const excelMailOptions = {
+    from: 'Gimena Motto <gimenapimba@gmail.com>',
+    to: 'gmotto.oposicionesarquitectos@gmail.com, ealvaro@oposicionesarquitectos.com',
+    subject: 'Listado facturas generadas',
+    text: 'Correo de prueba automático donde se adjunta a quique la lista de facturas generadas',
+    attachments: [
+      {
+        filename: excelFileName,
+        path: `./${excelFileName}`
+      }
+    ]
+  };
+  
+  transporter.sendMail(excelMailOptions, (err, info) => {
+    if (err) {
+      console.error('Error al enviar el archivo Excel por correo electrónico:', err);
+    } else {
+      console.log('Archivo Excel enviado por correo electrónico:', info.response);
+    }
+  });
+
+  
+  
+  
+  
+
+// TEXTO GENÉRICO: PONER lo del mes, investigar...
+// 
