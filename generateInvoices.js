@@ -11,7 +11,7 @@ const pathToCalibri = './Calibri Regular.ttf'
 const pathToCalibriBold = './Calibri Bold.ttf'
 const pathToCalibriItalic = './Calibri Italic.ttf'
 
-
+function generateInvoices() {
 // ejemplo números correlativos para las facturas
 let lastNumber = 1476
 
@@ -133,7 +133,7 @@ students.forEach((student, index) => {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-      user: 'gimenapimba@gmail.com',
+      user: 'oposicionesarquitectosmadrid@gmail.com',
       pass: process.env.PASSWORD,
   },
   tls: {
@@ -153,7 +153,7 @@ students.forEach((student, index) => {
       const body = `Hola! este es un correo de prueba. Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente al mes en curso.`;
 
       const mailOptions = {
-          from:'Gimena Motto <gimenapimba@gmail.com>',
+          from:'Gestión académica Oposiciones Arquitectos <info@oposicionesarquitectos.com>',
           to: recipient,
           subject: subject,
           text: body,
@@ -215,10 +215,10 @@ XLSX.writeFile(workbook, excelFileName);
 console.log(`Archivo Excel generado: ${excelFileName}`);
 
 const excelMailOptions = {
-    from: 'Gimena Motto <gimenapimba@gmail.com>',
-    to: 'gmotto.oposicionesarquitectos@gmail.com, ealvaro@oposicionesarquitectos.com',
+    from: 'Gestión académica Oposiciones Arquitectos <info@oposicionesarquitectos.com>',
+    to: 'gmotto.oposicionesarquitectos@gmail.com',
     subject: 'Listado facturas generadas',
-    text: 'Correo de prueba automático donde se adjunta a quique la lista de facturas generadas',
+    text: 'LISTA DESDE CORREO ACADEMIA',
     attachments: [
       {
         filename: excelFileName,
@@ -235,10 +235,12 @@ const excelMailOptions = {
     }
   });
 
-  
-  
-  
-  
+}
 
+generateInvoices();
+  
+  
 // TEXTO GENÉRICO: PONER lo del mes, investigar...
+//pedir a Quique en la estructura de datos como será siempre el mes SI ESPAÑOL O INGLÉS,
+// PARA QUE SE PUEDA ESCRIBIR EN EL CORREO TOMANDO EL DATO
 // 
