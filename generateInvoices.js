@@ -11,7 +11,7 @@ const pathToCalibri = './Calibri Regular.ttf'
 const pathToCalibriBold = './Calibri Bold.ttf'
 const pathToCalibriItalic = './Calibri Italic.ttf'
 
-function generateInvoices() {
+
 // ejemplo números correlativos para las facturas
 let lastNumber = 1476
 
@@ -142,6 +142,15 @@ const transporter = nodemailer.createTransport({
 });
 
 let lastNumberEmail = 1476;
+
+const { es } = require('date-fns/locale');
+
+// Obtén la fecha actual
+const currentDate = new Date();
+
+// Configura el idioma español para el formato de fecha
+const esLocale = es;
+
 students.forEach((student, index) => {
   lastNumberEmail++;
 
@@ -150,8 +159,9 @@ students.forEach((student, index) => {
       const invoice = `${student.ALUMNO.replace(/ /g, '_')}_20230${lastNumberEmail}.pdf`;
       const recipient = student.EMAIL;
       const subject = 'Factura de OPOSICIONES ARQUITECTOS';
-      const body = `Hola! este es un correo de prueba. Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente al mes en curso.`;
-
+      // const body = `Hola! Este es un correo de prueba. Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente a ${getFormattedDescription(student.DESCRIPCION)}`;
+      const body = `Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente a ${format(currentDate, 'MMMM', { locale: esLocale })} de ${format(currentDate, 'yyyy')}.
+       Un saludo`;
       const mailOptions = {
           from:'Gestión académica Oposiciones Arquitectos <info@oposicionesarquitectos.com>',
           to: recipient,
@@ -216,9 +226,9 @@ console.log(`Archivo Excel generado: ${excelFileName}`);
 
 const excelMailOptions = {
     from: 'Gestión académica Oposiciones Arquitectos <info@oposicionesarquitectos.com>',
-    to: 'gmotto.oposicionesarquitectos@gmail.com',
+    to: 'gmotto.oposicionesarquitectos@gmail.com,ealvaro@oposicionesarquitectos.com ',
     subject: 'Listado facturas generadas',
-    text: 'LISTA DESDE CORREO ACADEMIA',
+    text: 'Adjunto lista de facturas que se acaban de generar',
     attachments: [
       {
         filename: excelFileName,
@@ -235,12 +245,42 @@ const excelMailOptions = {
     }
   });
 
-}
 
-generateInvoices();
   
-  
-// TEXTO GENÉRICO: PONER lo del mes, investigar...
-//pedir a Quique en la estructura de datos como será siempre el mes SI ESPAÑOL O INGLÉS,
-// PARA QUE SE PUEDA ESCRIBIR EN EL CORREO TOMANDO EL DATO
-// 
+ //purria; formateo innecesario para mes pagado por el alumno
+ 
+// function getFormattedDescription(description) {
+//   const descriptionWithoutPrefix = description.replace("Mensualidad correspondiente a ", "");
+//   const monthYear = descriptionWithoutPrefix.split('-');
+//   const month = monthYear[0].toUpperCase();
+//   const year = monthYear[1];
+
+//   switch (month) {
+//     case 'ENE':
+//       return `ENERO ${year}`;
+//     case 'FEB':
+//       return `FEBRERO ${year}`;
+//     case 'MAR':
+//       return `MARZO ${year}`;
+//     case 'ABR':
+//       return `ABRIL ${year}`;
+//     case 'MAY':
+//       return `MAYO ${year}`;
+//     case 'JUN':
+//       return `JUNIO ${year}`;
+//     case 'JUL':
+//       return `JULIO ${year}`;
+//     case 'AGO':
+//       return `AGOSTO ${year}`;
+//     case 'SEP':
+//       return `SEPTIEMBRE ${year}`;
+//     case 'OCT':
+//       return `OCTUBRE ${year}`;
+//     case 'NOV':
+//       return `NOVIEMBRE ${year}`;
+//     case 'DIC':
+//       return `DICIEMBRE ${year}`;
+//     default:
+//       return descriptionWithoutPrefix;
+//   }
+// }
