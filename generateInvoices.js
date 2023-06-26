@@ -161,7 +161,7 @@ students.forEach((student, index) => {
       const subject = 'Factura de OPOSICIONES ARQUITECTOS';
       // const body = `Hola! Este es un correo de prueba. Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente a ${getFormattedDescription(student.DESCRIPCION)}`;
       const body = `Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente a ${format(currentDate, 'MMMM', { locale: esLocale })} de ${format(currentDate, 'yyyy')}.
-       Un saludo`;
+    Un saludo`;
       const mailOptions = {
           from:'Gestión académica Oposiciones Arquitectos <info@oposicionesarquitectos.com>',
           to: recipient,
@@ -177,9 +177,9 @@ students.forEach((student, index) => {
 
       transporter.sendMail(mailOptions, (err, info) => {
           if (err) {
-              console.error('Error al enviar el correo electrónico:', err);
+              console.error(`Error al enviar el correo electrónico a: ${student.EMAIL}, ${student.ALUMNO}`, err);
           } else {
-              console.log('Correo electrónico enviado:', info.response);
+              console.log(`Correo electrónico enviado a: ${student.EMAIL} , ${student.ALUMNO}`, info.response);
           }
       });
   }
