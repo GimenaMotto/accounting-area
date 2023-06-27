@@ -130,6 +130,9 @@ students.forEach((student, index) => {
     });
 });
 
+//ACÁ PARA ENVIAR TODOS LOS CORREOS
+
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -226,8 +229,8 @@ console.log(`Archivo Excel generado: ${excelFileName}`);
 
 const excelMailOptions = {
     from: 'Gestión académica Oposiciones Arquitectos <info@oposicionesarquitectos.com>',
-    to: 'gmotto.oposicionesarquitectos@gmail.com,ealvaro@oposicionesarquitectos.com ',
-    subject: 'Listado facturas generadas',
+    to: 'ealvaro@oposicionesarquitectos.com',
+    subject: 'LA LISTA BUENA',
     text: 'Adjunto lista de facturas que se acaban de generar',
     attachments: [
       {
@@ -246,41 +249,4 @@ const excelMailOptions = {
   });
 
 
-  
- //purria; formateo innecesario para mes pagado por el alumno
  
-// function getFormattedDescription(description) {
-//   const descriptionWithoutPrefix = description.replace("Mensualidad correspondiente a ", "");
-//   const monthYear = descriptionWithoutPrefix.split('-');
-//   const month = monthYear[0].toUpperCase();
-//   const year = monthYear[1];
-
-//   switch (month) {
-//     case 'ENE':
-//       return `ENERO ${year}`;
-//     case 'FEB':
-//       return `FEBRERO ${year}`;
-//     case 'MAR':
-//       return `MARZO ${year}`;
-//     case 'ABR':
-//       return `ABRIL ${year}`;
-//     case 'MAY':
-//       return `MAYO ${year}`;
-//     case 'JUN':
-//       return `JUNIO ${year}`;
-//     case 'JUL':
-//       return `JULIO ${year}`;
-//     case 'AGO':
-//       return `AGOSTO ${year}`;
-//     case 'SEP':
-//       return `SEPTIEMBRE ${year}`;
-//     case 'OCT':
-//       return `OCTUBRE ${year}`;
-//     case 'NOV':
-//       return `NOVIEMBRE ${year}`;
-//     case 'DIC':
-//       return `DICIEMBRE ${year}`;
-//     default:
-//       return descriptionWithoutPrefix;
-//   }
-// }
