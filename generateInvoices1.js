@@ -12,19 +12,19 @@ const pathToCalibriBold = './Calibri Bold.ttf'
 const pathToCalibriItalic = './Calibri Italic.ttf'
 
 
-// ejemplo números correlativos para las facturas
+// numeros correlativos para las facturas (hay q modificarlo después para poner en interfaz)
 let lastNumber = 1476
 
 students.forEach((student, index) => {
 
-   //incrementa en 1 el nro de factura cada vez q hace una durante el bucle
+   //incrementar nro de factura +1
     lastNumber++
 
-    // Crear un nuevo documento PDF
+    // Crear PDF
     const doc = new PDFDocument();
 
-    // Definir el nombre del archivo PDF con nombre de alumno y nro de factura
-    const fileName = `${student.ALUMNO.replace(/ /g, '_')}_20230${lastNumber}.pdf`
+    // Nombre del PDF
+    const fileName = `${student.ALUMNO}_20230${lastNumber}.pdf`
 
     //  fecha actual y formateo
     const currentDate = new Date();
@@ -148,20 +148,22 @@ let lastNumberEmail = 1476;
 
 const { es } = require('date-fns/locale');
 
-// Obtén la fecha actual
+// Obtener la fecha actual
 const currentDate = new Date();
 
-// Configura el idioma español para el formato de fecha
+// Configurar en español para el formato de fecha
 const esLocale = es;
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
   
+  //para enviar el correo
   async function sendEmail(student) {
-    // Código para enviar la factura por correo electrónico
-    const invoice = `${student.ALUMNO.replace(/ /g, '_')}_20230${lastNumberEmail}.pdf`;
+  
+    // const invoice = `${student.ALUMNO.replace(/ /g, '_')}_20230${lastNumberEmail}.pdf`;
+    const invoice = `${student.ALUMNO}_20230${lastNumberEmail}.pdf`;
     const recipient = student.EMAIL;
-    const subject = 'BORRAR ESTOS CORREOS, PRUEBA ASYNC';
+    const subject = 'PRUEBA ASYNC DE 15 SEGUNDOS, nombre de factura';
     const body = `Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente a ${format(currentDate, 'MMMM', { locale: esLocale })} de ${format(currentDate, 'yyyy')}.
     Un saludo`;
     const mailOptions = {
@@ -180,7 +182,7 @@ function delay(ms) {
     return new Promise((resolve, reject) => {
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
-          console.error(`Error al enviar el correo electrónico a: ${student.EMAIL}, ${student.ALUMNO}`, err);
+          console.error(`Error al enviar el correo electrónico a: ${student.EMAIL}, ${student.ALUMNO}, factura Nro ${lastNumberEmail}`, err);
           reject(err);
         } else {
           console.log(`Correo electrónico enviado a: ${student.EMAIL} , ${student.ALUMNO}`, info.response);
@@ -197,9 +199,9 @@ function delay(ms) {
       if (student.ENVIAR === 'SI') {
         try {
           await sendEmail(student);
-          await delay(3000); // Retardo de 3 segundos antes de enviar el siguiente correo
+          await delay(20000); // Retardo de 20 segundos antes de enviar el siguiente correo
         } catch (error) {
-          // Manejar el error si ocurre durante el envío del correo
+          
         }
       }
     }
@@ -207,52 +209,16 @@ function delay(ms) {
   
   sendEmails();
   
-// students.forEach((student, index) => {
-//     lastNumberEmail++;
-
-//     if (student.ENVIAR === 'SI') {
- 
-//             // Código para enviar la factura por correo electrónico
-//             const invoice = `${student.ALUMNO.replace(/ /g, '_')}_20230${lastNumberEmail}.pdf`;
-//             const recipient = student.EMAIL;
-//             const subject = 'BORRAR ESTOS CORREOS, PRUEBA ASYNC';
-//             // const body = `Hola! Este es un correo de prueba. Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente a ${getFormattedDescription(student.DESCRIPCION)}`;
-//             const body = `Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente a ${format(currentDate, 'MMMM', { locale: esLocale })} de ${format(currentDate, 'yyyy')}.
-//             Un saludo`;
-//             const mailOptions = {
-//                 from: 'Gestión académica Oposiciones Arquitectos <info@oposicionesarquitectos.com>',
-//                 to: recipient,
-//                 subject: subject,
-//                 text: body,
-//                 attachments: [
-//                     {
-//                         filename: invoice,
-//                         path: `./${invoice}`
-//                     }
-//                 ]
-//             };
-
-//             transporter.sendMail(mailOptions, (err, info) => {
-//                 if (err) {
-//                     console.error(`Error al enviar el correo electrónico a: ${student.EMAIL}, ${student.ALUMNO}`, err);
-//                 } else {
-//                     console.log(`Correo electrónico enviado a: ${student.EMAIL} , ${student.ALUMNO}`, info.response);
-//                 }
-//             });
-     
-//     }
-// });
-
 
 const XLSX = require('xlsx');
 
-// Crear una nueva hoja de cálculo
+//crear nueva hoja de cálculo
 const workbook = XLSX.utils.book_new();
 
-// Crear una nueva hoja en el libro de trabajo
+
 const worksheet = XLSX.utils.json_to_sheet([]);
 
-// Agregar encabezados de columna
+// encabezados excel
 const headers = ['Factura', 'Fecha', 'Cliente', 'Importe Neto', 'IVA', 'Importe Bruto'];
 const headerRow = XLSX.utils.sheet_add_aoa(worksheet, [headers], { origin: 'A1' });
 
@@ -277,7 +243,7 @@ students.forEach((student, index) => {
 // Agregar la hoja al libro de trabajo
 XLSX.utils.book_append_sheet(workbook, worksheet, 'Facturas');
 
-// Guardar el libro de trabajo como archivo Excel
+// Guardar comoa rchivo excel
 const excelFileName = 'facturas.xlsx';
 XLSX.writeFile(workbook, excelFileName);
 
