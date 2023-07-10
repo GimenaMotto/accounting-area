@@ -24,7 +24,7 @@ students.forEach((student, index) => {
     const doc = new PDFDocument();
 
     // Nombre del PDF
-    const fileName = `${student.ALUMNO.replace(/ /g, '_')}_20230${lastNumber}.pdf`
+    const fileName = `${student.ALUMNO}_20230${lastNumber}.pdf`
 
     //  fecha actual y formateo
     const currentDate = new Date();
@@ -161,7 +161,7 @@ function delay(ms) {
   async function sendEmail(student) {
   
     // const invoice = `${student.ALUMNO.replace(/ /g, '_')}_20230${lastNumberEmail}.pdf`;
-    const invoice = `${student.ALUMNO.replace}_20230${lastNumberEmail}.pdf`;
+    const invoice = `${student.ALUMNO}_20230${lastNumberEmail}.pdf`;
     const recipient = student.EMAIL;
     const subject = 'PRUEBA ASYNC DE 15 SEGUNDOS, nombre de factura';
     const body = `Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente a ${format(currentDate, 'MMMM', { locale: esLocale })} de ${format(currentDate, 'yyyy')}.
@@ -272,4 +272,5 @@ const excelMailOptions = {
   });
 
 
+ 
  

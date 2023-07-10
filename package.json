@@ -2,8 +2,9 @@
   "name": "facturas",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
+    "start": "electron .", 
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,12 +12,14 @@
   "dependencies": {
     "date-fns": "^2.30.0",
     "dotenv": "^16.1.4",
-    "electron": "^25.1.1",
     "fs": "^0.0.1-security",
     "googleapis": "^118.0.0",
     "nodemailer": "^6.9.3",
     "pdfkit": "^0.13.0",
     "readline": "^1.3.0",
     "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "electron": "^25.2.0"
   }
 }
