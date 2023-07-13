@@ -96,19 +96,19 @@ students.forEach((student, index) => {
 
     // Pie de página
     doc.font(pathToCalibriItalic).fontSize(9).fillColor('gray').text(`"Enseñanza exenta de IVA Artículo 20 Uno 9º de la Ley 37/1992 de 28 de DICIEMBRE del Impuesto sobre el Valor Añadido"`, 50, 570, {align: 'center'} )
-    doc.font(pathToCalibriItalic).fontSize(9).fillColor('gray').text("625 47 47 77 - info@oposicionesarquitectos.com www.oposicionesarquitectos.com",100,590, {align: 'center'} )
-    doc.font(pathToCalibriItalic).fontSize(9).fillColor('gray').text("OPOSICIONES ARQUITECTOS - C/. Molino de la Navata, 59 28260 - Galapagar - Madrid", 100, 610, {align: 'center'})
+    doc.font(pathToCalibriItalic).fontSize(9).fillColor('gray').text("625 47 47 77 - info@oposicionesarquitectos.com www.oposicionesarquitectos.com",90,595, {align: 'center'} )
+    doc.font(pathToCalibriItalic).fontSize(9).fillColor('gray').text("OPOSICIONES ARQUITECTOS - C/. Molino de la Navata, 59 28260 - Galapagar - Madrid", 85, 615, {align: 'center'})
    
     // texto final protección de datos, etc.
     const texto = "De acuerdo con lo establecido en el Reglamento (UE) 2016/679 de Protección de Datos de Carácter Personal (RGPD) procedemos a informarles que los datos personales que Ud. nos facilite serán tratados en nuestros sistemas de información con la finalidad de llevar a cabo la gestión interna del cliente. Todos o parte de los datos aportados serán comunicados a las administraciones públicas competentes. El titular de los datos se compromete a comunicar por escrito a OPOSICIONES ARQUITECTOS, S.L. cualquier modificación que se produzca en los datos aportados. usted podrá en cualquier momento ejercer sus derechos de acceso, rectificación, cancelación, oposición, limitación y portabilidad de datos en los términos establecidos en el RGPD mediante notificación escrita, adjuntando copia de su DNI o tarjeta identificativa, a OPOSICIONES ARQUITECTOS, S.L., con domicilio en Calle Molino de la Navata, 59 28260 Galapagar, o a nuestro correo info@oposicionesarquitectos.com Usted puede consultar nuestra política de Protección de Datos en www.oposicionesarquitectos.com";
 
     const textoSinSaltosDeLinea = texto.replace(/\n/g, '')
     
-    doc.font(pathToCalibriItalic).fontSize(7).fillColor('black').text(textoSinSaltosDeLinea, 70, 645 ,{
+    doc.font(pathToCalibriItalic).fontSize(7).fillColor('black').text(textoSinSaltosDeLinea, 70, 655 ,{
       align: 'justify',
       width: 450,
       height: 300,
-      lineGap: 5,
+      lineGap: 3.5,
       indent: 10,
       ellipsis: true
     })
@@ -163,9 +163,9 @@ function delay(ms) {
     // const invoice = `${student.ALUMNO.replace(/ /g, '_')}_20230${lastNumberEmail}.pdf`;
     const invoice = `${student.ALUMNO}_20230${lastNumberEmail}.pdf`;
     const recipient = student.EMAIL;
-    const subject = 'PRUEBA ASYNC DE 15 SEGUNDOS, nombre de factura';
+    const subject = 'async 20 segundos, ';
     const body = `Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente a ${format(currentDate, 'MMMM', { locale: esLocale })} de ${format(currentDate, 'yyyy')}.
-    Un saludo`;
+  Un saludo`;
     const mailOptions = {
       from: 'Gestión académica Oposiciones Arquitectos <info@oposicionesarquitectos.com>',
       to: recipient,
@@ -251,10 +251,10 @@ console.log(`Archivo Excel generado: ${excelFileName}`);
 
 const excelMailOptions = {
     from: 'Gestión académica Oposiciones Arquitectos <info@oposicionesarquitectos.com>',
-    // to: 'ealvaro@oposicionesarquitectos.com',
-    to: "gmotto.oposicionesarquitectos@gmail.com",
-    subject: 'LA LISTA BUENA',
-    text: 'Adjunto lista de facturas que se acaban de generar',
+    to: 'ealvaro@oposicionesarquitectos.com',
+    // to: "gmotto.oposicionesarquitectos@gmail.com",
+    subject: 'LISTA',
+    text: 'Adjunto lista de facturas',
     attachments: [
       {
         filename: excelFileName,
@@ -272,5 +272,4 @@ const excelMailOptions = {
   });
 
 
- 
  
