@@ -1,11 +1,11 @@
-require('dotenv').config()
+
 const readline = require('readline');
 
 const students = require('./students.json')
 const PDFDocument = require('pdfkit')
 const fs = require('fs')
 const { format } = require('date-fns')
-// const nodemailer = require('nodemailer')
+
 
 const pathToCalibri = './Calibri Regular.ttf'
 const pathToCalibriBold = './Calibri Bold.ttf'
