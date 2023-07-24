@@ -163,7 +163,7 @@ function delay(ms) {
     // const invoice = `${student.ALUMNO.replace(/ /g, '_')}_20230${lastNumberEmail}.pdf`;
     const invoice = `${student.ALUMNO}_20230${lastNumberEmail}.pdf`;
     const recipient = student.EMAIL;
-    const subject = 'async 20 segundos, ';
+    const subject = 'Factura Oposiciones Arquitectos';
     const body = `Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente a ${format(currentDate, 'MMMM', { locale: esLocale })} de ${format(currentDate, 'yyyy')}.
   Un saludo`;
     const mailOptions = {
