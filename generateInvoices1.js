@@ -13,7 +13,7 @@ const pathToCalibriItalic = './Calibri Italic.ttf'
 
 
 // numeros correlativos para las facturas (hay q modificarlo después para poner en interfaz)
-let lastNumber = 1476
+let lastNumber = 1786
 
 students.forEach((student, index) => {
 
@@ -144,7 +144,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-let lastNumberEmail = 1476;
+let lastNumberEmail = 1786;
 
 const { es } = require('date-fns/locale');
 
@@ -159,8 +159,7 @@ function delay(ms) {
   
   //para enviar el correo
   async function sendEmail(student) {
-  
-    // const invoice = `${student.ALUMNO.replace(/ /g, '_')}_20230${lastNumberEmail}.pdf`;
+
     const invoice = `${student.ALUMNO}_20230${lastNumberEmail}.pdf`;
     const recipient = student.EMAIL;
     const subject = 'Factura Oposiciones Arquitectos';
@@ -224,7 +223,7 @@ const headerRow = XLSX.utils.sheet_add_aoa(worksheet, [headers], { origin: 'A1' 
 
 let rowIndex = 2; // La primera fila se usa para los encabezados
 
-let lastNumberList = 1476
+let lastNumberList = 1786
 
 students.forEach((student, index) => {
 
