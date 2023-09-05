@@ -13,7 +13,7 @@ const pathToCalibriItalic = './Calibri Italic.ttf'
 
 
 // numeros correlativos para las facturas (hay q modificarlo después para poner en interfaz)
-let lastNumber = 
+let lastNumber = 2075
 
 students.forEach((student, index) => {
 
@@ -66,7 +66,7 @@ students.forEach((student, index) => {
     doc.font(pathToCalibri).fontSize(11).fillColor('gray').text(`NIF: ${student.DNI}`, 70, 245)
     doc.font(pathToCalibriBold).fontSize(12).fillColor('black').text(`Num. Factura:  20230${lastNumber}`,400, 245 )
     doc.font(pathToCalibri).fontSize(11).fillColor('gray').text(`${student.DIRECCION}`, 70, 265)
-    doc.font(pathToCalibriBold).fontSize(12).fillColor('black').text(`Fecha:  ${formattedDate}`, 400, 265)
+    doc.font(pathToCalibriBold).fontSize(12).fillColor('black').text(`Fecha:  31/08/2023 `, 400, 265)
     doc.font(pathToCalibri).fontSize(11).fillColor('gray').text(`${student.CODIGOPOSTAL} - ${student.CIUDAD} - ${student.PROVINCIA}`, 70, 285)
 
     // Concepto (palabra)
@@ -144,7 +144,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-let lastNumberEmail = 1786;
+let lastNumberEmail = 2075;
 
 const { es } = require('date-fns/locale');
 
@@ -163,8 +163,7 @@ function delay(ms) {
     const invoice = `${student.ALUMNO}_20230${lastNumberEmail}.pdf`;
     const recipient = student.EMAIL;
     const subject = 'Factura Oposiciones Arquitectos';
-    const body = `Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente a ${format(currentDate, 'MMMM', { locale: esLocale })} de ${format(currentDate, 'yyyy')}.
-  Un saludo`;
+    const body = `Estimado/a ${student.ALUMNO}, adjunto encontrarás la factura correspondiente al mes de agosto de 2023. Un saludo`;
     const mailOptions = {
       from: 'Gestión académica Oposiciones Arquitectos <info@oposicionesarquitectos.com>',
       to: recipient,
@@ -223,14 +222,15 @@ const headerRow = XLSX.utils.sheet_add_aoa(worksheet, [headers], { origin: 'A1' 
 
 let rowIndex = 2; // La primera fila se usa para los encabezados
 
-let lastNumberList = 1786
+let lastNumberList = 2075
 
 students.forEach((student, index) => {
 
  lastNumberList++;
 
   const currentDate = new Date();
-  const formattedDate = format(currentDate, 'MM/dd/yyyy');
+//   const formattedDate = format(currentDate, 'MM/dd/yyyy');
+const formattedDate = '31/08/2023'
   const importeNeto = student['TOTAL A PAGAR'];
   const importeBruto = student['TOTAL A PAGAR'];
 
@@ -250,8 +250,8 @@ console.log(`Archivo Excel generado: ${excelFileName}`);
 
 const excelMailOptions = {
     from: 'Gestión académica Oposiciones Arquitectos <info@oposicionesarquitectos.com>',
-    to: 'ealvaro@oposicionesarquitectos.com',
-    // to: "gmotto.oposicionesarquitectos@gmail.com",
+    // to: 'ealvaro@oposicionesarquitectos.com',
+    to: "gmotto.oposicionesarquitectos@gmail.com",
     subject: 'LISTA',
     text: 'Adjunto lista de facturas',
     attachments: [
